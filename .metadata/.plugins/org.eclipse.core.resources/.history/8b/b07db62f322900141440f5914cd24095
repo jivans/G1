@@ -1,0 +1,58 @@
+package com.example.webapplication;
+
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.View;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+
+
+public class MainActivity extends ActionBarActivity {
+Intent intent,chooser;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+    
+    public void launchmap(View v){
+    	intent=new Intent(android.content.Intent.ACTION_VIEW);
+    	Log.d("JIVAN","in launch map");
+    	intent.setData(Uri.parse("geo:19.076,72.8777"));
+    	//startActivity(intent);
+    	chooser=Intent.createChooser(intent,"maps");
+    	startActivity(chooser);
+	
+}
+    public void sendImage(View v){
+    	Uri img= Uri.parse("android.resource://com.example.webapplication/drawble/"+R.drawable.ic_launcher);
+    	intent=new Intent(Intent.ACTION_SEND);
+    	intent.setType("image/*");
+    	intent.putExtra(intent.EXTRA_STREAM,img);
+    	chooser=Intent.createChooser(intent,"maps");
+    	startActivity(chooser);
+	
+}
+   
+    public void launchmarket(View v){
+    	Log.d("JIVAN","in launch market");
+    	intent=new Intent(android.content.Intent.ACTION_VIEW);  	
+    	intent.setData(Uri.parse("market://details?id=dolphin.developers.com"));
+    	chooser=Intent.createChooser(intent,"Market Places");
+    	startActivity(chooser);
+}
+    
+    public void sendmail(View v){
+    	Log.d("JIVAN","in send mail");
+    	intent=new Intent(Intent.ACTION_SEND);
+    	intent.setData(Uri.parse("mailto:"));
+    	intent.putExtra(Intent.EXTRA_EMAIL,"suhagiyajivan1992@gmail.com");
+    	intent.putExtra(Intent.EXTRA_SUBJECT,"this mail is from application");
+    	intent.putExtra(Intent.EXTRA_TEXT,"hi,you recieved mail from application");
+    	intent.setType("message/rfc822");
+    	chooser=Intent.createChooser(intent,"SEND MAIL:");
+    	startActivity(chooser);
+    			}
+    
+}
